@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interacción usuario: Canvas</title>
+</head>
+<body>
+  <h1>Programa CANVAS interacción usuario</h1>
+    
+    <canvas width="600" height="400"></canvas> <!-- cada cuadrado mide 50 -->
+ 
+  <script>
+       
+    var pantalla = document.querySelector("canvas"); // conector HTML-JS
+    var pincel = pantalla.getContext("2d"); // traiga contenido en pantalla
+ 
+    pincel.fillStyle = "grey";
+    pincel.fillRect(0,0,600,400);
+
+    function mostrarAlerta(evento){
+      var x = evento.pageX -pantalla.offsetLeft; // RESTAR lo q SOBRA de la pantalla IZQ
+      var y = evento.pageY - pantalla.offsetTop;
+      console.log(evento);
+      alert(x + "," + y);
+    }
+
+    function dibujarCirculo(evento){
+      var x = evento.pageX - pantalla.offsetLeft; 
+      var y = evento.pageY - pantalla.offsetTop;
+      
+      pincel.fillStyle = "blue";
+      pincel.beginPath();
+      pincel.arc(x,y,10,0,2*3.14);
+      pincel.fill(); // para q aparezca 
+      console.log(x + "," + y);
+    }
+
+    pantalla.onclick = dibujarCirculo; //cuando hago click mostrame alerta
+
+  </script>
+
+</body>
+</html>
